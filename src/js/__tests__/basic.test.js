@@ -1,44 +1,32 @@
 import { Character, Team } from "../app";
 
 test ('Add only one character', ()=> {
-  const createCharacter = new Character("Маг", 100, 5);
-  const expectedCharacter = [{name: "Маг", health: 100, attack: 5}];
-  const newTeamAdd = new Team();
-  newTeamAdd.add(createCharacter);
+  const character = new Character("Маг");
+  const expectedCharacter = [{name: "Маг"}];
+  const newTeam = new Team();
+  newTeam.add(character);
  
-  expect(newTeamAdd.toArray()).toEqual(expectedCharacter)
+  expect(newTeam.toArray()).toEqual(expectedCharacter)
 })
 
 test ('Add all character', () => {
-  const createCharacter = new Character("Маг", 100, 5);
-  const createCharacter1 = new Character("Мечник", 100, 4);
-  const createCharacter2 = new Character("Лучник", 100, 7);
-  const teamAdd = new Team();
-  teamAdd.addAll(createCharacter, createCharacter1, createCharacter2);
+  const character1 = new Character("Маг");
+  const character2 = new Character("Мечник");
+  const character3 = new Character("Лучник");
+  const newTeam = new Team();
+  newTeam.addAll(character1, character2, character3);
   const expectedCharacter = [
-    {name: "Маг", health: 100, attack: 5},
-    {name: "Мечник", health: 100, attack: 4},
-    {name: "Лучник", health: 100, attack: 7}
+    "Маг",
+    "Мечник",
+    "Лучник"
   ];
-  expect(teamAdd.toArray()).toEqual(expectedCharacter);
+  expect(newTeam.toArray()).toEqual(expectedCharacter);
 })
 
 test ('Character has already been added', () => {
-  const createCharacter = new Character("Маг", 100, 5);
+  const character = new Character("Маг");
   const newTeamAdd = new Team();
-  newTeamAdd.add(createCharacter);
+  newTeamAdd.add(character);
   
-  expect(() => newTeamAdd.add(createCharacter)).toThrow(`Персонаж ${createCharacter.name} уже добавлен`);
-})
-
-test ('Characters has alreay been added', () => {
-  const characters = [
-    new Character("Маг", 100, 5),
-    new Character("Мечник", 100, 4),
-    new Character("Лучник", 100, 7),
-    new Character("Маг", 100, 5)
-  ];
-  const teamAdd = new Team();
-  teamAdd.addAll(characters[0], characters[1], characters[2]);
-  expect(() => teamAdd.addAll(characters[3])).toThrow(`Персонаж ${characters[3].name} уже добавлен`)
+  expect(() => newTeamAdd.add(character)).toThrow(`Персонаж ${character.name} уже добавлен`);
 })
