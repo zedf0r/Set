@@ -30,3 +30,18 @@ test ('Character has already been added', () => {
   
   expect(() => newTeamAdd.add(character)).toThrow(`Персонаж ${character.name} уже добавлен`);
 })
+
+test ('Add all characters and one copy character', () => {
+  const character1 = new Character("Маг");
+  const character2 = new Character("Мечник");
+  const character3 = new Character("Лучник");
+  const character4 = new Character("Маг");
+  const newTeam = new Team();
+  newTeam.addAll(character1, character2, character3, character4);
+  const expectedCharacter = [
+    "Маг",
+    "Мечник",
+    "Лучник",
+  ];
+  expect(newTeam.toArray()).toEqual(expectedCharacter);
+})
